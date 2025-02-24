@@ -36,7 +36,7 @@ const Cssgradients = () => {
       onClick: () => {
         const cssStyle = {
           'background-color': colorList[selectColors][colorList[selectColors].length - 1],
-          'background-images': background,
+          'background': background,
         }
         let css = Object.entries(cssStyle)
           .map(([key, value]) => `${key}: ${value};`)
