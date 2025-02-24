@@ -71,7 +71,7 @@ const Cssgradients = () => {
   useEffect(() => {
     let color = gradientColor(colorList[selectColors])
     setBackground(color)
-  }, [selectColors, selectAngle])
+  }, [colorList, selectColors, selectAngle])
 
   useEffect(() => {
     setColorList(generateColorArray(99))
