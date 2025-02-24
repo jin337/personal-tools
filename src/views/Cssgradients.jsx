@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import Title from '../components/Title'
 
-const angleList = ['right', null, 'left', 'top']
+const angleList = ['0deg', '45deg', '90deg', '135deg', '180deg', '225deg', '270deg', '315deg']
 
 const Cssgradients = () => {
   const CssgradientsRef = useRef()
@@ -36,7 +36,7 @@ const Cssgradients = () => {
       onClick: () => {
         const cssStyle = {
           'background-color': colorList[selectColors][colorList[selectColors].length - 1],
-          'background': background,
+          background: background,
         }
         let css = Object.entries(cssStyle)
           .map(([key, value]) => `${key}: ${value};`)
@@ -79,10 +79,7 @@ const Cssgradients = () => {
   }, [])
 
   // 生成背景
-  const gradientColor = (colors) => {
-    const gradientDirection = angleList[selectAngle] !== null ? `to ${angleList[selectAngle]} ,` : ''
-    return `linear-gradient(${gradientDirection}${colors.join(',')})`
-  }
+  const gradientColor = (colors) => `linear-gradient(${angleList[selectAngle]} ,${colors.join(',')})`
 
   // 生成颜色
   const getRandomHexColor = () => {
