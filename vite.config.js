@@ -1,12 +1,12 @@
-import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
 
-import compression from 'vite-plugin-compression' // 代码压缩
 import legacy from '@vitejs/plugin-legacy' // js浏览器兼容
+import compression from 'vite-plugin-compression' // 代码压缩
 
-import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer' // css浏览器前缀
 import postcssPresetEnv from 'postcss-preset-env' // css浏览器兼容性
+import tailwindcss from 'tailwindcss'
 
 export default defineConfig({
   server: {
@@ -17,6 +17,11 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [tailwindcss, autoprefixer(), postcssPresetEnv()],
+    },
+  },
+  resolve: {
+    alias: {
+      src: '/src',
     },
   },
   plugins: [

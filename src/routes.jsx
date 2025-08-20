@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import Home from './views/index.jsx'
-import Triangle from './views/Triangle.jsx'
-import Flexbox from './views/Flexbox.jsx'
-import CssDocs from './views/Cssdocs.jsx'
-import Cssgradients from './views/Cssgradients.jsx'
+import CssDocs from 'src/pages/Cssdocs.jsx'
+import Cssgradients from 'src/pages/Cssgradients.jsx'
+import Flexbox from 'src/pages/Flexbox.jsx'
+import Triangle from 'src/pages/Triangle.jsx'
+import Home from 'src/views/index.jsx'
 
 export const router = createBrowserRouter([
   {
