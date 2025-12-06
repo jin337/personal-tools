@@ -1,10 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import CssDocs from 'src/pages/Cssdocs.jsx'
-import Cssgradients from 'src/pages/Cssgradients.jsx'
+import Home from 'src/views/index.jsx'
+
+import CssDocs from 'src/pages/CssDocs.jsx'
+import CssGradients from 'src/pages/CssGradients.jsx'
 import Flexbox from 'src/pages/Flexbox.jsx'
 import Triangle from 'src/pages/Triangle.jsx'
-import Home from 'src/views/index.jsx'
+import Waterfall from 'src/pages/Waterfall.jsx'
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +27,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/css-gradients',
-        element: <Cssgradients />,
+        element: <CssGradients />,
+      },
+      {
+        path: '/waterfall',
+        element: <Waterfall />,
       },
     ],
   },

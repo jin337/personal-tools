@@ -1,5 +1,5 @@
 {
-  "name": "react-demo",
+  "name": "personal-tools",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "html2canvas": "^1.4.1",
+    "@zumer/snapdom": "^1.9.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.26.1"

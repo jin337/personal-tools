@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "iconfont";
+  font-family: 'iconfont';
   src: url('./assets//fonts/iconfont.ttf?t=1724728122274') format('truetype');
 }
 
 .iconfont {
-  font-family: "iconfont" !important;
+  font-family: 'iconfont' !important;
   font-size: 24px;
   line-height: 1;
   font-style: normal;
@@ -141,11 +141,11 @@ input {
       background: #eceff7;
       cursor: pointer;
       &:hover {
-        background-color: #0094ff;
+        background-color: #2563eb;
       }
     }
     .active {
-      background-color: #0094ff;
+      background-color: #2563eb;
     }
     .rightTop {
       top: 0;
@@ -175,11 +175,11 @@ input {
       width: 60px;
       height: 60px;
       &:hover {
-        background-color: #0094ff;
+        background-color: #2563eb;
       }
     }
     .active {
-      background-color: #0094ff;
+      background-color: #2563eb;
     }
     .top {
       bottom: 0;
@@ -198,4 +198,8 @@ input {
       left: 0;
     }
   }
+}
+.waterfall {
+  display: masonry;
+  masonry: repeat(3,  200px) column;
 }

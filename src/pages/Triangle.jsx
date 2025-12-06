@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import Title from '../components/Title'
+import Title from 'src/components/Title'
+import useCopyToClipboard from 'src/hooks/useCopyToClipboard'
 
 const directionList = [
   {
@@ -58,10 +59,11 @@ const Triangle = () => {
   const [formState, setFormState] = useState({
     size: 200,
     direction: 'top',
-    color: '#0094ff',
+    color: '#2563eb',
     type: 'iso',
   })
   const [showCode, setShowCode] = useState(null)
+  const handleCopy = useCopyToClipboard()
 
   // 转变属性
   useEffect(() => {
@@ -206,13 +208,16 @@ const Triangle = () => {
           </div>
 
           <div className='my-2 font-bold'>CSS</div>
-          <div className='rounded-lg bg-[#eceff7] px-4 py-1'>
+          <div className='relative rounded-lg bg-[#eceff7] px-4 py-1'>
             <pre className='whitespace-pre-wrap'>
               {showCode &&
                 Object.entries(showCode)
                   .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value};`)
                   .join('\n')}
             </pre>
+            <div className='iconfont absolute right-1 top-1 cursor-pointer select-none' onClick={() => handleCopy(showCode)}>
+              &#xeac1;
+            </div>
           </div>
         </div>
       </div>

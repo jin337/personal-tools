@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import Title from '../components/Title'
+import Title from 'src/components/Title'
+import useCopyToClipboard from 'src/hooks/useCopyToClipboard'
 
 const flexProperties = [
   {
@@ -70,6 +71,7 @@ const Flexbox = () => {
     width: 85,
   })
   const [showCode, setShowCode] = useState(null)
+  const handleCopy = useCopyToClipboard()
 
   useEffect(() => {
     const code = JSON.parse(JSON.stringify(formState))
@@ -140,8 +142,11 @@ const Flexbox = () => {
             </div>
           ))}
         </div>
-        <div className='my-4 rounded-lg bg-[#eceff7] px-4 py-1'>
+        <div className='relative my-4 rounded-lg bg-[#eceff7] px-4 py-1'>
           <pre>{showCode}</pre>
+          <div className='iconfont absolute right-1 top-1 cursor-pointer select-none' onClick={() => handleCopy(showCode)}>
+            &#xeac1;
+          </div>
         </div>
         <div className='w-full'>
           <div className='top flex justify-between'>

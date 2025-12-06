@@ -1,12 +1,14 @@
-import html2canvas from 'html2canvas'
 import { useEffect, useRef, useState } from 'react'
 
-import Title from '../components/Title'
+import { snapdom } from '@zumer/snapdom'
+import Title from 'src/components/Title'
+import useCopyToClipboard from 'src/hooks/useCopyToClipboard'
 
 const angleList = ['0deg', '45deg', '90deg', '135deg', '180deg', '225deg', '270deg', '315deg']
 
-const Cssgradients = () => {
+const CssGradients = () => {
   const CssgradientsRef = useRef()
+  const handleCopy = useCopyToClipboard()
 
   const [colorList, setColorList] = useState([
     ['#a1b2c3', '#4d5e6f', '#789abc'],
@@ -47,21 +49,14 @@ const Cssgradients = () => {
     {
       name: '&#xeb2c;',
       tooltip: '下载图片',
-      onClick: () => {
+      onClick: async () => {
         if (CssgradientsRef.current) {
           const mainElement = CssgradientsRef.current.querySelector('.gradients-main')
           if (mainElement) {
             mainElement.style.opacity = '0'
-
-            html2canvas(CssgradientsRef.current).then((canvas) => {
-              const img = canvas.toDataURL('image/png')
-              const link = document.createElement('a')
-              link.href = img
-              link.download = 'gradients.png'
-              link.click()
-
-              mainElement.style.opacity = ''
-            })
+            const result = await snapdom(CssgradientsRef.current, { scale: 2 })
+            await result.download({ format: 'png', filename: 'gradients' })
+            mainElement.style.opacity = ''
           }
         }
       },
@@ -118,26 +113,6 @@ const Cssgradients = () => {
   const onSelect = (index) => {
     setSelectColors(index)
     setShowAll(false)
-  }
-
-  // 复制
-  const handleCopy = (e) => {
-    navigator.clipboard
-      .writeText(e)
-      .then(() => {
-        const message = document.createElement('div')
-        message.className =
-          'copied-message absolute top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm py-2 px-4 rounded animate-fadeUp'
-        message.innerText = '已复制'
-        document.body.appendChild(message)
-
-        setTimeout(() => {
-          document.body.removeChild(message)
-        }, 1000)
-      })
-      .catch((err) => {
-        console.error('复制失败:', err)
-      })
   }
 
   return (
@@ -208,4 +183,4 @@ const Cssgradients = () => {
     </div>
   )
 }
-export default Cssgradients
+export default CssGradients

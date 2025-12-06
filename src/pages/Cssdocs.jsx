@@ -1,5 +1,5 @@
-import { useRef, useEffect } from 'react'
-import Title from '../components/Title'
+import { useEffect, useRef } from 'react'
+import Title from 'src/components/Title'
 
 const cssConcepts = [
   {
