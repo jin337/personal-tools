@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import CssDocs from 'src/pages/Cssdocs.jsx'
+import CssDocs from 'src/pages/CssDocs.jsx'
 import Cssgradients from 'src/pages/Cssgradients.jsx'
 import Flexbox from 'src/pages/Flexbox.jsx'
 import Triangle from 'src/pages/Triangle.jsx'
