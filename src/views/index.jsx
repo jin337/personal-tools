@@ -18,10 +18,6 @@ const menu = [
     name: 'CSS渐变色',
     link: '/css-gradients',
   },
-  {
-    name: '瀑布流',
-    link: '/waterfall',
-  },
 ]
 
 const Home = () => {
