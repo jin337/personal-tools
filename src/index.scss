@@ -141,11 +141,11 @@ input {
       background: #eceff7;
       cursor: pointer;
       &:hover {
-        background-color: #2563eb;
+        background-color: #0094ff;
       }
     }
     .active {
-      background-color: #2563eb;
+      background-color: #0094ff;
     }
     .rightTop {
       top: 0;
@@ -175,11 +175,11 @@ input {
       width: 60px;
       height: 60px;
       &:hover {
-        background-color: #2563eb;
+        background-color: #0094ff;
       }
     }
     .active {
-      background-color: #2563eb;
+      background-color: #0094ff;
     }
     .top {
       bottom: 0;
@@ -198,8 +198,4 @@ input {
       left: 0;
     }
   }
-}
-.waterfall {
-  display: masonry;
-  masonry: repeat(3,  200px) column;
 }
