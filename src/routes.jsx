@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 import CssDocs from 'src/pages/CssDocs.jsx'
-import Cssgradients from 'src/pages/Cssgradients.jsx'
+import Cssgradients from 'src/pages/CssGradients.jsx'
 import Flexbox from 'src/pages/Flexbox.jsx'
 import Triangle from 'src/pages/Triangle.jsx'
 import Home from 'src/views/index.jsx'
