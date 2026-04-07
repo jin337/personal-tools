@@ -520,15 +520,22 @@ const cssConcepts = [
 const CssDocs = () => {
   const containerRef = useRef(null)
 
-  useEffect(() => {
+  // 提取布局计算逻辑
+  const calculateLayout = () => {
     const container = containerRef.current
     if (!container) return
 
     const items = Array.from(container.children)
+    if (items.length === 0) return
+
     const columnCount = 6 // 列数
     const columnGap = 16 // 列间距
     const rowGap = 16 // 行间距
     const containerWidth = container.clientWidth
+
+    // 防止容器宽度为0时计算出错
+    if (containerWidth <= 0) return
+
     const columnWidth = (containerWidth - (columnCount - 1) * columnGap) / columnCount
 
     // 记录每列的总高度
@@ -547,13 +554,37 @@ const CssDocs = () => {
       columns[minColumnIndex] += item.clientHeight + rowGap
     })
 
+    // 设置容器高度为最高列的高度，以便内容能撑开页面滚动
+    const max_height = Math.max(...columns)
+    container.style.height = `${max_height}px`
     container.style.position = 'relative'
+  }
+
+  useEffect(() => {
+    // 初始加载时计算一次
+    setTimeout(calculateLayout, 0)
+
+    // 定义防抖函数
+    let resizeTimer = null
+    const handleResize = () => {
+      if (resizeTimer) clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(calculateLayout, 100) // 100ms 防抖
+    }
+
+    // 添加监听
+    window.addEventListener('resize', handleResize)
+
+    // 清理函数：组件卸载时移除监听
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      if (resizeTimer) clearTimeout(resizeTimer)
+    }
   }, [])
 
   return (
     <>
       <Title>CSS速查表</Title>
-      <div ref={containerRef}>
+      <div ref={containerRef} className='w-full'>
         {cssConcepts.map((category, index) => (
           <div className='break-all rounded-lg p-4 shadow' key={index} style={{ backgroundColor: category.bg || '#fff' }}>
             <h2 className='mb-2 text-sm font-bold'>
