@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 const menu = [
   {
@@ -8,7 +7,7 @@ const menu = [
     link: '/flexbox',
   },
   {
-    name: 'Triangle',
+    name: '三角形生成器',
     link: '/triangle',
   },
   {
@@ -47,7 +46,7 @@ const Home = () => {
           </div>
         ))}
       </div>
-      <div className='font-Courier relative w-[calc(100%-200px)] min-w-[750px] overflow-y-auto bg-white p-4'>
+      <div className='relative w-[calc(100%-200px)] min-w-[750px] overflow-y-auto bg-white p-4 font-Courier'>
         <Outlet />
       </div>
     </div>

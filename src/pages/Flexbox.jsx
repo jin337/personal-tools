@@ -71,12 +71,21 @@ const Flexbox = () => {
     width: 85,
   })
   const [showCode, setShowCode] = useState(null)
+  const [showStyle, setShowStyle] = useState(null)
   const handleCopy = useCopyToClipboard()
 
   useEffect(() => {
     const code = JSON.parse(JSON.stringify(formState))
     delete code.size
     delete code.width
+
+    const styleObj = Object.entries(code).reduce((acc, [key, value]) => {
+      const kebabKey = key.replace(/-(\w)/g, (_, char) => char.toUpperCase())
+      acc[kebabKey] = value
+      return acc
+    }, {})
+    setShowStyle(styleObj)
+
     const cssRules = Object.entries(code)
       .map(([key, value]) => `${key}: ${value};`)
       .join('\n')
@@ -164,15 +173,7 @@ const Flexbox = () => {
               <input type='range' name='width' max={200} min={50} value={formState.width} onChange={handleChangeWidth} />
             </div>
           </div>
-          <div
-            className='my-2 flex min-h-72 gap-1 rounded-lg bg-blue-600 p-4'
-            style={{
-              flexDirection: formState['flex-direction'],
-              flexWrap: formState['flex-wrap'],
-              justifyContent: formState['justify-content'],
-              alignItems: formState['align-items'],
-              alignContent: formState['align-content'],
-            }}>
+          <div className='my-2 flex min-h-72 gap-1 rounded-lg bg-blue-600 p-4' style={showStyle}>
             {[...Array(formState.size)].map((_, index) => (
               <div key={index} className='rounded-lg bg-white p-2 text-center' style={{ width: formState.width + 'px' }}>
                 {index + 1}

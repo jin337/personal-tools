@@ -63,6 +63,7 @@ const Triangle = () => {
     type: 'iso',
   })
   const [showCode, setShowCode] = useState(null)
+  const [showStyle, setShowStyle] = useState(null)
   const handleCopy = useCopyToClipboard()
 
   // 转变属性
@@ -71,47 +72,57 @@ const Triangle = () => {
     let directionCode = {
       width: 0,
       height: 0,
-      borderStyle: 'solid',
+      'border-style': 'solid',
     }
 
     switch (code.direction) {
       case 'top':
-        directionCode.borderWidth = `0 ${code.size / 2}px ${code.size}px ${code.size / 2}px`
-        directionCode.borderColor = `transparent transparent ${code.color} transparent`
+        directionCode['border-width'] = `0 ${code.size / 2}px ${code.size}px ${code.size / 2}px`
+        directionCode['border-color'] = `transparent transparent ${code.color} transparent`
         break
       case 'bottom':
-        directionCode.borderWidth = `${code.size}px ${code.size / 2}px 0 ${code.size / 2}px`
-        directionCode.borderColor = `${code.color} transparent transparent transparent`
+        directionCode['border-width'] = `${code.size}px ${code.size / 2}px 0 ${code.size / 2}px`
+        directionCode['border-color'] = `${code.color} transparent transparent transparent`
         break
       case 'left':
-        directionCode.borderWidth = `${code.size / 2}px ${code.size}px ${code.size / 2}px 0`
-        directionCode.borderColor = `transparent ${code.color} transparent transparent`
+        directionCode['border-width'] = `${code.size / 2}px ${code.size}px ${code.size / 2}px 0`
+        directionCode['border-color'] = `transparent ${code.color} transparent transparent`
         break
       case 'right':
-        directionCode.borderWidth = `${code.size / 2}px 0 ${code.size / 2}px ${code.size}px`
-        directionCode.borderColor = `transparent transparent transparent ${code.color}`
+        directionCode['border-width'] = `${code.size / 2}px 0 ${code.size / 2}px ${code.size}px`
+        directionCode['border-color'] = `transparent transparent transparent ${code.color}`
         break
       case 'leftTop':
-        directionCode.borderWidth = `${code.size}px ${code.size}px 0 0`
-        directionCode.borderColor = `${code.color} transparent transparent transparent`
+        directionCode['border-width'] = `${code.size}px ${code.size}px 0 0`
+        directionCode['border-color'] = `${code.color} transparent transparent transparent`
         break
       case 'leftBottom':
-        directionCode.borderWidth = `${code.size}px 0 0 ${code.size}px`
-        directionCode.borderColor = `transparent transparent transparent ${code.color}`
+        directionCode['border-width'] = `${code.size}px 0 0 ${code.size}px`
+        directionCode['border-color'] = `transparent transparent transparent ${code.color}`
         break
       case 'rightTop':
-        directionCode.borderWidth = `0 ${code.size}px ${code.size}px 0`
-        directionCode.borderColor = `transparent ${code.color} transparent transparent`
+        directionCode['border-width'] = `0 ${code.size}px ${code.size}px 0`
+        directionCode['border-color'] = `transparent ${code.color} transparent transparent`
         break
       case 'rightBottom':
-        directionCode.borderWidth = `0 0 ${code.size}px ${code.size}px`
-        directionCode.borderColor = `transparent transparent ${code.color} transparent`
+        directionCode['border-width'] = `0 0 ${code.size}px ${code.size}px`
+        directionCode['border-color'] = `transparent transparent ${code.color} transparent`
         break
       default:
         break
     }
 
-    setShowCode(directionCode)
+    const styleObj = Object.entries(directionCode).reduce((acc, [key, value]) => {
+      const kebabKey = key.replace(/-(\w)/g, (_, char) => char.toUpperCase())
+      acc[kebabKey] = value
+      return acc
+    }, {})
+    setShowStyle(styleObj)
+
+    const text = Object.entries(directionCode)
+      .map(([key, value]) => `${key}: ${value};`)
+      .join('\n')
+    setShowCode(text)
   }, [formState])
 
   // 监控属性变化
@@ -204,17 +215,12 @@ const Triangle = () => {
         <div className='w-1/2'>
           <div className='my-2 font-bold'>展示</div>
           <div className='min-h-[300px] bg-triangle'>
-            <div className='show' style={showCode}></div>
+            <div className='show' style={showStyle}></div>
           </div>
 
           <div className='my-2 font-bold'>CSS</div>
           <div className='relative rounded-lg bg-[#eceff7] px-4 py-1'>
-            <pre className='whitespace-pre-wrap'>
-              {showCode &&
-                Object.entries(showCode)
-                  .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value};`)
-                  .join('\n')}
-            </pre>
+            <pre className='whitespace-pre-wrap'>{showCode}</pre>
             <div className='iconfont absolute right-1 top-1 cursor-pointer select-none' onClick={() => handleCopy(showCode)}>
               &#xeac1;
             </div>
